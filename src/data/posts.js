@@ -2,13 +2,13 @@
 const posts = [
     {
       id: 1,
-      title: "First Post",
-      content: "This is the content of the first post.",
+      title: "phone s10",
+      content: "got stolen after one week",
     },
     {
       id: 2,
-      title: "Second Post",
-      content: "This is the content of the second post.",
+      title: "Growth",
+      content: "You have to be alone to focus on youreself",
     },
     
   ];
