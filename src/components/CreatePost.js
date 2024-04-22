@@ -1,24 +1,50 @@
-// CreatePost.js
 import React, { useState } from "react";
 
 const CreatePost = () => {
-  // State to manage form input values
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
-  // Function to handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you can send the post data to your backend or perform any other action
-    console.log("New Post Data:", { title, content });
-    // Reset form fields after submission
-    setTitle("");
-    setContent("");
+    if (!title.trim() || !content.trim()) {
+      setError("Both title and content are required");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    try {
+      // Simulate post creation
+      await createPost({ title, content });
+
+      setSuccess(true);
+      setTitle("");
+      setContent("");
+    } catch (err) {
+      setError("Failed to create post. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const createPost = async (postData) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        // Simulate successful post creation
+        resolve();
+      }, 1000);
+    });
   };
 
   return (
     <div>
       <h2>Create a New Post</h2>
+      {error && <div className="error">{error}</div>}
+      {success && <div className="success">Post created successfully!</div>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title">Title:</label>
@@ -37,7 +63,9 @@ const CreatePost = () => {
             onChange={(e) => setContent(e.target.value)}
           />
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Creating..." : "Create Post"}
+        </button>
       </form>
     </div>
   );
