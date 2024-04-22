@@ -1,5 +1,6 @@
+// App.js
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import PostList from "./components/PostList";
 import PostDetails from "./components/PostDetails";
@@ -9,10 +10,11 @@ function App() {
     <Router>
       <div>
         <Header />
-        <Switch>
-          <Route path="/" exact component={PostList} />
-          <Route path="/post/:id" component={PostDetails} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<PostList />} />
+          <Route path="/post/:id" element={<PostDetails />} />
+          
+        </Routes>
       </div>
     </Router>
   );
