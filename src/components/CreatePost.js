@@ -32,10 +32,15 @@ const CreatePost = () => {
   };
 
   const createPost = async (postData) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
         // Simulate successful post creation
-        resolve();
+        const success = Math.random() < 1; // 90% success rate
+        if (success) {
+          resolve();
+        } else {
+          reject(new Error("Server error"));
+        }
       }, 1000);
     });
   };
@@ -53,7 +58,9 @@ const CreatePost = () => {
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            className={error && !title.trim() ? "error" : ""}
           />
+          {error && !title.trim() && <div className="error">Title is required</div>}
         </div>
         <div>
           <label htmlFor="content">Content:</label>
@@ -61,7 +68,9 @@ const CreatePost = () => {
             id="content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            className={error && !content.trim() ? "error" : ""}
           />
+          {error && !content.trim() && <div className="error">Content is required</div>}
         </div>
         <button type="submit" disabled={loading}>
           {loading ? "Creating..." : "Create Post"}

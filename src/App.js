@@ -6,7 +6,6 @@ import PostList from "./components/PostList";
 import PostDetails from "./components/PostDetails";
 import CreatePost from "./components/CreatePost";
 
-
 function App() {
   return (
     <Router>
@@ -16,8 +15,6 @@ function App() {
           <Route path="/" element={<PostList />} />
           <Route path="/post/:id" element={<PostDetails />} />
           <Route path="/create-post" element={<CreatePost />} />
-
-          
         </Routes>
       </div>
     </Router>
